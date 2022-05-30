@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>ABC confession</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">ABC confession</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/create">Home</a></li>
+      </ul>
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group input-group">
+          <input type="text" class="form-control" placeholder="Search..">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </span>        
+        </div>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Admin Login</a></li>
+    </ul>
+    </div>
+  </div>
+</nav>
+<br/>
+
+
+<!-- success message -->
+				<div th:if="${param.success}">
+					<div class="alert alert-info">
+					 <strong>Success! </strong>
+					  Your confession will be published soon.
+					  <br/>
+					  <br/>
+					  
+					  <!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">Click here to view your confession post ID.</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Your confession post ID</th>				
+						<th>Submission date and time</th>
+
+					</tr>
+				</thead>
+				<tbody>					
+					<tr th:each="post: ${posts}">
+						<td><span th:text="${post.Id}"></span></td>
+						<td><span th:text="${post.date}"></span></td>
+											
+					</tr>
+				</tbody>
+		</table></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+					  
+					
+				</div>
+				</div>
+				
+				<div th:if="${param.fail}">
+					<div class="alert alert-danger">Fail to submit!</div>				
+				</div>
+
+				
+<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Post a confession</button>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	</div>
+	
+	
+	
+	<!-- Create HTML registration form -->
+	
+				
+	 <div class="modal-body">
+	<div class="container-fluid fixed-top p-0">
+		<div class="row">
+			<div class="ml-auto col-auto">
+				
+				
+				
+
+				<h1 align="left">Post Submission</h1>
+			<form th:action="@{/create}" method="post">
+					<div class="form-group">
+						<label class="control-label">Reply ID (if no please type "null")</label>
+						<input name="replyId" class="form-control" type="text" autofocus="autofocus"/>
+					</div>
+					<div class="form-group">
+						<label class="control-label"> Text </label>
+						<textarea rows="10" name="text" class="form-control" type="text" required autofocus="autofocus"></textarea>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	
+	
+
+	
+
+
+<div class="container my-2">
+	<h1>Confessions</h1>
+	
+	
+		<table border="1" class = "table table-striped table-responsive-md">
+			<thead>
+				<tr>
+				<th>
+							Id
+					</th>
+					<th>					
+							replyId
+					</th>
+					<th>		
+							text
+					</th>
+					<th>
+							date
+					</th>
+					<th> Actions </th>
+				</tr>
+			</thead>
+			
+		</table>
+		
+		
+	</div>
+	
+  
+     
+	
+</body>
+</html>
