@@ -1,26 +1,22 @@
 package net.javaguides.springboot.model;
 
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+public class SubmissionPost {
 
-@Entity
-@Table(name = "posted")
-public class Posted {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private static AtomicInteger count = new AtomicInteger(0);
 	private Long id;
 	private String text;
 	private Long replyId;
-	private Date date = new Date();
+	private Date date;
 	
-	public Posted(Long id, String text, Long replyId) {
+	public SubmissionPost() {
 		super();
-		this.id = id;
+	}
+
+	public SubmissionPost(String text, Long replyId) {
+		super();
 		this.text = text;
 		this.replyId = replyId;
 	}
@@ -29,8 +25,8 @@ public class Posted {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId() {
+		this.id = Long.valueOf(count.incrementAndGet());
 	}
 
 	public String getText() {
@@ -56,11 +52,6 @@ public class Posted {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
-	public Posted() {
-		super();
-	}
-	
 	
 	
 }
